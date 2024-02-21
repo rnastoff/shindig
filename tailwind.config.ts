@@ -12,6 +12,7 @@ const config: Config = {
       'primary': "#d33232",
       'primarydark': "#301010",
       'black': "#000000",
+      'gray': "#777777",
       'white': "#ffffff",
       'green': "#32d362"
     },

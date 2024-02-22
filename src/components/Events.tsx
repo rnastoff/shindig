@@ -3,11 +3,12 @@ import FilterDropdown from "@/components/FilterDropdown";
 
 const Events = () => {
   return (
-    <div className="flex justify-center bg-background">
-      <div className="lg:w-[550px] w-[350px] ">
+    <div className="flex justify-center bg-background px-4">
+      <div className="lg:w-[550px] w-[350px]">
+        {/* Fixed Section */}
         <div className="bg-background pb-4 fixed lg:w-[550px] w-[350px] pt-8">
-          <h2 className="text-white font-black text-4xl">Events</h2>
-          <div className="flex justify-between mt-4">
+          <h2 className="text-white font-black md:text-4xl text-2xl">Events</h2>
+          <div className="flex justify-between lg:mt-4 mt-2">
             <label className="max-w-full w-full mr-2">
               <input
                 type="text"
@@ -19,7 +20,8 @@ const Events = () => {
           </div>
         </div>
 
-        <div className="text-white mt-40">
+        {/* Posts */}
+        <div className="text-white lg:mt-40 mt-36 duration-500">
           <PreviewPost />
           <PreviewPost />
           <PreviewPost />

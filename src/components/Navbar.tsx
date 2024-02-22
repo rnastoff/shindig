@@ -28,7 +28,10 @@ const Navbar = () => {
   ];
 
   const buttonsHtml = navButtons.map((btn) => (
-    <li className="hover:bg-primarydark duration-300 py-2 rounded-md mt-4" key="3">
+    <li
+      className="md:hover:bg-primarydark duration-300 px-2 py-2 rounded-md mt-4"
+      key={btn.text}
+    >
       <Link href="/" className="flex">
         {btn.icon}
         <p className="text-white ml-2 self-center lg:block hidden">{btn.text}</p>
@@ -40,7 +43,7 @@ const Navbar = () => {
     <nav className=" border-r-[1px] border-primary h-full fixed lg:w-56 w-24 sm:block hidden px-4">
       <div className="mt-8 lg:block flex flex-col justify-items-center align-center">
         <h1
-          className={`${pacifico.className} text-primary lg:text-[37px] text-[20px] self-center`}
+          className={`${pacifico.className} text-primary lg:text-[37px] text-[20px] self-center px-2`}
         >
           Shindig
         </h1>

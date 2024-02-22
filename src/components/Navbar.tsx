@@ -11,50 +11,40 @@ const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 const Navbar = () => {
   const iconSize = 27;
 
+  const icons = [
+    { icon: <House color="white" size={iconSize} className="self-center" /> },
+    { icon: <Calendar color="white" size={iconSize} className="self-center" /> },
+    { icon: <PlusSquare color="white" size={iconSize} className="self-center" /> },
+    { icon: <Person color="white" size={iconSize} className="self-center" /> },
+    { icon: <Gear color="white" size={iconSize} className="self-center" /> },
+  ];
+
+  const navButtons = [
+    { text: "Events", href: "/", icon: icons[0].icon },
+    { text: "Today", href: "/", icon: icons[1].icon },
+    { text: "Create", href: "/", icon: icons[2].icon },
+    { text: "Profile", href: "/", icon: icons[3].icon },
+    { text: "Settings", href: "/", icon: icons[4].icon },
+  ];
+
+  const buttonsHtml = navButtons.map((btn) => (
+    <li className="hover:bg-primarydark duration-300 py-2 rounded-md mt-4" key="3">
+      <Link href="/" className="flex">
+        {btn.icon}
+        <p className="text-white ml-2 self-center lg:block hidden">{btn.text}</p>
+      </Link>
+    </li>
+  ));
+
   return (
-    <nav className=" border-r-[1px] border-primary h-full w-56 fixed">
-      <div className="mt-8">
-        <h1 className={`${pacifico.className} text-primary text-[44px]`}>
+    <nav className=" border-r-[1px] border-primary h-full fixed lg:w-56 w-24 sm:block hidden px-4">
+      <div className="mt-8 lg:block flex flex-col justify-items-center align-center">
+        <h1
+          className={`${pacifico.className} text-primary lg:text-[37px] text-[20px] self-center`}
+        >
           Shindig
         </h1>
-
-        {/* Nav */}
-        <ul className="mr-2 mt-6">
-          <li className="hover:bg-primarydark duration-300 px-4 py-2 rounded-md">
-            <Link href="/" className="flex">
-              <House color="white" size={iconSize} className="self-center" />
-              <p className="text-white ml-2 self-center">Events</p>
-            </Link>
-          </li>
-          <li className="hover:bg-primarydark duration-300 px-4 py-2 rounded-md mt-4">
-            <Link href="/" className="flex">
-              <Calendar color="white" size={iconSize} className="self-center" />
-              <p className="text-white ml-2 self-center">Today</p>
-            </Link>
-          </li>
-          <li className="hover:bg-primarydark duration-300 px-4 py-2 rounded-md mt-4">
-            <Link href="/" className="flex">
-              <PlusSquare
-                color="white"
-                size={iconSize}
-                className="self-center"
-              />
-              <p className="text-white ml-2 self-center">Create</p>
-            </Link>
-          </li>
-          <li className="hover:bg-primarydark duration-300 px-4 py-2 rounded-md mt-4">
-            <Link href="/" className="flex">
-              <Person color="white" size={iconSize} className="self-center" />
-              <p className="text-white ml-2 self-center">Person</p>
-            </Link>
-          </li>
-          <li className="hover:bg-primarydark duration-300 px-4 py-2 rounded-md mt-4">
-            <Link href="/" className="flex">
-              <Gear color="white" size={iconSize} className="self-center" />
-              <p className="text-white ml-2 self-center">Settings</p>
-            </Link>
-          </li>
-        </ul>
+        <ul className="lg:mt-6 mt-2 self-center">{buttonsHtml}</ul>
       </div>
     </nav>
   );

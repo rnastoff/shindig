@@ -1,16 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Star } from "react-bootstrap-icons";
-import MobileHeader from "./MobileHeader";
+import MobileHeader from "./HeaderMobile";
+import Search from "./Search";
 
 const EventDetails = () => {
   return (
     <main className="flex justify-center bg-background px-4">
       <div className="lg:w-[550px] w-[350px] mb-24">
         {/* Fixed Section */}
+        <div className="bg-background pb-4 fixed lg:w-[550px] w-[350px] sm:pt-8 pt-2 sm:block hidden">
+          <Search />
+        </div>
 
         {/* Posts */}
-        <div className="text-white mt-8 duration-500">
+        <div className="text-white lg:mt-28 sm:mt-24 mt-24 duration-500">
           <div className="">
             <p className="text-sm">SATURDAY DECEMBER 10, 2024</p>
             <p className="lg:text-2xl text-xl font-bold">Chicago Raw Beef Festival</p>

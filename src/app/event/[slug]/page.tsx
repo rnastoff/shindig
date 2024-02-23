@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import NavMobile from "@/components/NavMobile";
 import EventDetails from "@/components/EventDetails";
 import SidebarLine from "@/components/SidebarLine";
-import MobileHeader from "@/components/MobileHeader";
+import MobileHeader from "@/components/HeaderMobile";
 
 const Event = () => {
   return (

@@ -42,7 +42,9 @@ const PreviewPost = () => {
       </div>
 
       <Link className="text-center" href={`post/${"some slug"}`}>
-        <p className="text-gray hover:text-white duration-500 mt-4">See Details</p>
+        <p className="text-gray text-sm hover:text-white duration-500 mt-4">
+          See Details
+        </p>
       </Link>
 
       <div className="border-b-[1px] border-primary mt-4"></div>

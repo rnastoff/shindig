@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import NavMobile from "@/components/NavMobile";
 import EventsFeed from "@/components/EventsFeed";
-import CategoriesSidebar from "@/components/CategoriesSidebar";
+import SidebarCategories from "@/components/SidebarCategories";
 import HeaderMobile from "@/components/HeaderMobile";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <div className="relative">
         <Navbar />
         <NavMobile />
-        <CategoriesSidebar />
+        <SidebarCategories />
       </div>
       <EventsFeed />
     </div>

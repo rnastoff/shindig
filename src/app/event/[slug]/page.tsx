@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import NavMobile from "@/components/NavMobile";
 import EventDetails from "@/components/EventDetails";
-import SidebarLine from "@/components/SidebarLine";
+import SidebarCategories from "@/components/SidebarCategories";
 import MobileHeader from "@/components/HeaderMobile";
 
 const Event = () => {
@@ -11,7 +11,7 @@ const Event = () => {
       <div className="relative scale-1">
         <Navbar />
         <NavMobile />
-        <SidebarLine />
+        <SidebarCategories />
       </div>
       <EventDetails />
     </div>

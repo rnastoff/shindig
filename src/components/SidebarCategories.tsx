@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const CategoriesSidebar = () => {
+const SidebarCategories = () => {
   const categories = [
     "Music",
     "Movies",
@@ -38,4 +38,4 @@ const CategoriesSidebar = () => {
   );
 };
 
-export default CategoriesSidebar;
+export default SidebarCategories;

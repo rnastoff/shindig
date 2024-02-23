@@ -1,24 +1,21 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-
 import Navbar from "@/components/Navbar";
 import NavMobile from "@/components/NavMobile";
-import EventsFeed from "@/components/EventsFeed";
-import CategoriesSidebar from "@/components/CategoriesSidebar";
+import EventDetails from "@/components/EventDetails";
+import SidebarLine from "@/components/SidebarLine";
 import MobileHeader from "@/components/MobileHeader";
 
-export default function Home() {
+const Event = () => {
   return (
     <div>
       <MobileHeader />
       <div className="relative scale-1">
         <Navbar />
         <NavMobile />
-        <CategoriesSidebar />
+        <SidebarLine />
       </div>
-      <EventsFeed />
+      <EventDetails />
     </div>
   );
-}
+};
+
+export default Event;

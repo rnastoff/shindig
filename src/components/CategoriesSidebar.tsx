@@ -26,7 +26,7 @@ const CategoriesSidebar = () => {
               className="mt-2 px-2 hover:bg-primarydark rounded-md duration-500"
               key={cat}
             >
-              <Link href={`/category/${cat}`} className="text-base ">
+              <Link href={`/category/${cat}`} className="flex text-base ">
                 <p className=""></p>
                 {cat}
               </Link>

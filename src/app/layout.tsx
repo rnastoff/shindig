@@ -20,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-background`}>{children}</body>
+      <body className={`${inter.className} bg-background`}>
+        <div className="flex justify-center items-center">
+          <div className="relative lg:max-w-7xl max-w-3xl w-full h-screen">
+            {children}
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

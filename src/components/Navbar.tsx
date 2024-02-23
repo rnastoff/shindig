@@ -42,11 +42,14 @@ const Navbar = () => {
   return (
     <nav className=" border-r-[1px] border-primary h-full fixed lg:w-56 w-24 sm:block hidden px-4">
       <div className="mt-8 lg:block flex flex-col justify-items-center align-center">
-        <h1
-          className={`${pacifico.className} text-primary lg:text-[37px] text-[20px] self-center px-2`}
-        >
-          Shindig
-        </h1>
+        <Link href="/" className="self-center">
+          <h1
+            className={`${pacifico.className} text-primary lg:text-[35px] text-[20px] px-2`}
+          >
+            Shindig
+          </h1>
+        </Link>
+
         <ul className="lg:mt-6 mt-2 self-center">{buttonsHtml}</ul>
       </div>
     </nav>

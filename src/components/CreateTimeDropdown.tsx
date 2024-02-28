@@ -46,21 +46,21 @@ const CreateTimeDropdown = () => {
 
   return (
     <div className="mt-8">
-      <p className="text-white font-semibold text-base">Start Time</p>
+      <p className="text-white font-semibold">Start Time</p>
       <button
         className="relative self-center mt-1 w-[180px]"
         onClick={toggleDropdown}
         onBlur={dismissHandler}
       >
         <div className="flex justify-between bg-background border-[1px] border-primary rounded-sm py-[5.5px] px-2">
-          <p className="text-white whitespace-nowrap sm:text-base text-xs ">
+          <p className="text-white whitespace-nowrap text-base ">
             {selectTime ? selectTime : "Any Time"}
           </p>
           <ChevronDown color="white" size="14" className="self-center ml-2" />
         </div>
 
         {showDropdown && (
-          <div className="absolute sm:top-[44px] top-[34px] right-[0px] w-[160px] py-1 px-1 text-white text-sm text-right bg-primary border-[1px] border-primary rounded-md z-10">
+          <div className="absolute sm:top-[44px] top-[34px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-md z-10">
             {dropdownHtml}
           </div>
         )}

@@ -148,7 +148,7 @@ const CreateEvent = () => {
         </p>
 
         <div className="flex justify-end mt-4">
-          <button className="text-white text-semi-bold text-lg bg-primary rounded-md py-2 px-8">
+          <button className="text-white text-semi-bold sm:text-lg text-base bg-primary rounded-md sm:py-2 px-8 py-1 ">
             Submit
           </button>
         </div>

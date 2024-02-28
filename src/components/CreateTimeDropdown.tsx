@@ -1,20 +1,12 @@
 import { useState } from "react";
-
+import { fillTimeArray } from "@/utils/utils";
 import { ChevronDown } from "react-bootstrap-icons";
 
 const CreateTimeDropdown = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectTime, setSelectTime] = useState("");
 
-  const times = [
-    "Any Time",
-    "Today",
-    "Tomorrow",
-    "This Week",
-    "This Weekend",
-    "Next Week",
-    "Specific Day",
-  ];
+  const times = fillTimeArray();
 
   const toggleDropdown = (e: any) => {
     e.stopPropagation();
@@ -60,7 +52,7 @@ const CreateTimeDropdown = () => {
         </div>
 
         {showDropdown && (
-          <div className="absolute sm:top-[44px] top-[34px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-md z-10">
+          <div className="absolute h-48 overflow-y-auto sm:top-[44px] top-[34px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-md z-10">
             {dropdownHtml}
           </div>
         )}

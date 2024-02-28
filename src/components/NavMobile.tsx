@@ -19,7 +19,10 @@ const NavMobile = () => {
           </Link>
         </li>
         <li>
-          <Link href="/" className="flex flex-col justify-items-center align-center">
+          <Link
+            href="/create"
+            className="flex flex-col justify-items-center align-center"
+          >
             <PlusSquare color={"#d33232"} size={iconSize} className="self-center" />
             <p className="text-white text-xs font-semibold mt-1">Create</p>
           </Link>

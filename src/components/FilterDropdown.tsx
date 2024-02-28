@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ChevronDown } from "react-bootstrap-icons";
 
@@ -30,6 +30,18 @@ const FilterDropdown = () => {
     setSelectTime(time);
   };
 
+  const dropdownHtml = times.map((city: string, index: number) => {
+    return (
+      <p
+        className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"
+        key={index}
+        onClick={() => timeSelection(city)}
+      >
+        {city}
+      </p>
+    );
+  });
+
   return (
     <button
       className="relative self-center"
@@ -44,18 +56,8 @@ const FilterDropdown = () => {
       </div>
 
       {showDropdown && (
-        <div className="absolute sm:top-[44px] top-[34px] right-[0px] text-white text-sm text-right bg-background border-[1px] border-primary rounded-md z-10">
-          {times.map((city: string, index: number) => {
-            return (
-              <p
-                className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"
-                key={index}
-                onClick={() => timeSelection(city)}
-              >
-                {city}
-              </p>
-            );
-          })}
+        <div className="absolute sm:top-[44px] top-[34px] right-[0px] w-[160px] py-1 px-1 text-white text-sm text-right bg-primary border-[1px] border-primary rounded-md z-10">
+          {dropdownHtml}
         </div>
       )}
     </button>

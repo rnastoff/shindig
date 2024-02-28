@@ -21,10 +21,10 @@ const Navbar = () => {
 
   const navButtons = [
     { text: "Events", href: "/", icon: icons[0].icon },
-    { text: "Today", href: "/", icon: icons[1].icon },
-    { text: "Create", href: "/", icon: icons[2].icon },
-    { text: "Profile", href: "/", icon: icons[3].icon },
-    { text: "Settings", href: "/", icon: icons[4].icon },
+    { text: "Today", href: "/today", icon: icons[1].icon },
+    { text: "Create", href: "/create", icon: icons[2].icon },
+    { text: "Profile", href: `/user/someID`, icon: icons[3].icon },
+    { text: "Settings", href: "/settomgs", icon: icons[4].icon },
   ];
 
   const buttonsHtml = navButtons.map((btn) => (
@@ -32,7 +32,7 @@ const Navbar = () => {
       className="md:hover:bg-primarydark duration-300 px-2 py-2 rounded-md mt-4"
       key={btn.text}
     >
-      <Link href="/" className="flex">
+      <Link href={btn.href} className="flex">
         {btn.icon}
         <p className="text-white ml-2 self-center lg:block hidden">{btn.text}</p>
       </Link>

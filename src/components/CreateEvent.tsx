@@ -22,7 +22,10 @@ const CreateEvent = () => {
 
   return (
     <section className="flex justify-center bg-background px-4">
-      <form className="lg:w-[550px] w-[350px] mt-8 mb-20" onSubmit={handleSubmit}>
+      <form
+        className="lg:w-[550px] w-[350px] sm:mt-8 mt-24 mb-20"
+        onSubmit={handleSubmit}
+      >
         {/* Fixed Section */}
         <h1 className="text-white text-2xl font-bold">Create Event</h1>
         <div className="border-b-[1px] border-primary mt-2"></div>

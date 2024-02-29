@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { House } from "react-bootstrap-icons";
-import { Calendar } from "react-bootstrap-icons";
 import { PlusSquare } from "react-bootstrap-icons";
 import { Person } from "react-bootstrap-icons";
 import { Gear } from "react-bootstrap-icons";
@@ -10,7 +9,7 @@ const NavMobile = () => {
   const iconSize = 18;
 
   return (
-    <nav className="sm:hidden block fixed bottom-0 bg-background border-t-[1px] border-primary z-1 px-4 py-3 w-full">
+    <nav className="sm:hidden block fixed bottom-0 bg-background border-t-[1px] border-primary z-20 px-4 py-3 w-full">
       <ul className="flex justify-between">
         <li>
           <Link href="/" className="flex flex-col justify-items-center align-center">

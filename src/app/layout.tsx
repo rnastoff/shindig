@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
+import NavMobile from "@/components/NavMobile";
+import EventsFeed from "@/components/EventsFeed";
+import SidebarCategories from "@/components/SidebarCategories";
+import HeaderMobile from "@/components/HeaderMobile";
+
 // const inter = Inter({ subsets: ["latin"] });
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

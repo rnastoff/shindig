@@ -6,7 +6,8 @@
 
 .react-date-picker__wrapper {
   border: thin solid #d33232 !important;
-  border-radius: 0.25rem !important;
+  border-radius: 0.125rem !important;
+  /* font-size: 0.9em !important; */
   padding: 0.25rem !important;
   width: 180px;
 }

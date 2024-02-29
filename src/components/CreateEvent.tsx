@@ -73,7 +73,7 @@ const CreateEvent = () => {
         </div>
 
         {/* Calendar and dropdowns */}
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <div className="">
             <CreateCalendar />
             <CreateCalendar />

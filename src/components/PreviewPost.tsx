@@ -4,7 +4,7 @@ import { Star } from "react-bootstrap-icons";
 
 const PreviewPost = () => {
   return (
-    <div className="mt-8">
+    <div className="text-white mt-8 ">
       <p className="text-sm">SATURDAY DECEMBER 10, 2024</p>
       <p className="lg:text-2xl text-xl font-bold">Chicago Raw Beef Festival</p>
       <p className="text-base text-gray">Millenium Park</p>

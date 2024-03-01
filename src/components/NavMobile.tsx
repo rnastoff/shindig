@@ -27,13 +27,19 @@ const NavMobile = () => {
           </Link>
         </li>
         <li>
-          <Link href="/" className="flex flex-col justify-items-center align-center">
+          <Link
+            href="/user/someSlug"
+            className="flex flex-col justify-items-center align-center"
+          >
             <Person color={"#d33232"} size={iconSize} className="self-center" />
             <p className="text-white text-xs font-semibold mt-1">Profile</p>
           </Link>
         </li>
         <li>
-          <Link href="/" className="flex flex-col justify-items-center align-center">
+          <Link
+            href="/settings"
+            className="flex flex-col justify-items-center align-center"
+          >
             <Gear color={"#d33232"} size={iconSize} className="self-center" />
             <p className="text-white text-xs font-semibold mt-1">Settings</p>
           </Link>

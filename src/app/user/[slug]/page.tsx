@@ -24,9 +24,6 @@ const Profile = () => {
                 Bob Bobberson
               </p>
             </div>
-            <button className="text-white font-semibold text-sm bg-primary rounded-md py-2 px-4 self-center">
-              Edit Profile
-            </button>
           </div>
           {/* <div className="border-b-[1px] border-primary mt-2"></div> */}
 

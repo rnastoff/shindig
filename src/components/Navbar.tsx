@@ -24,7 +24,7 @@ const Navbar = () => {
     { text: "Today", href: "/today", icon: icons[1].icon },
     { text: "Create", href: "/create", icon: icons[2].icon },
     { text: "Profile", href: `/user/someID`, icon: icons[3].icon },
-    { text: "Settings", href: "/settomgs", icon: icons[4].icon },
+    { text: "Settings", href: "/settings", icon: icons[4].icon },
   ];
 
   const buttonsHtml = navButtons.map((btn) => (

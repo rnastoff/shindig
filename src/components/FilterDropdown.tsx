@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { ChevronDown } from "react-bootstrap-icons";
 
 const FilterDropdown = () => {
@@ -13,7 +12,6 @@ const FilterDropdown = () => {
     "This Week",
     "This Weekend",
     "Next Week",
-    "Specific Day",
   ];
 
   const toggleDropdown = () => {

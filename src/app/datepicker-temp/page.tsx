@@ -8,10 +8,19 @@ import { ChevronRight } from "react-bootstrap-icons";
 const DatePicker = () => {
   const [visible, setVisible] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("Select Day");
 
   const toggleVisibility = (e: any) => {
     e.preventDefault();
     setVisible((prevState) => !prevState);
+  };
+
+  const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log(e.currentTarget.value);
+    setSelectedDate(e.currentTarget.value); //for the visible input
+    // setSelectedDay(); //just the numbered day
+    setVisible(false);
   };
 
   const visibilityClass = visible ? "block" : "hidden";
@@ -34,8 +43,10 @@ const DatePicker = () => {
       <button
         key={day}
         className="text-white text-sm hover:text-green hover:bg-white duration-100 flex justify-center items-center text-center  w-[35px] h-[35px]"
+        onClick={handleDayClick}
+        value={"12-06-1979"}
       >
-        {day}
+        <abbr aria-label={day}>{day}</abbr>
       </button>
     );
   });
@@ -49,7 +60,7 @@ const DatePicker = () => {
       >
         <input
           type="text"
-          value="Specific Time"
+          value={selectedDate}
           className="w-[130px] border-2 cursor-pointer border-none outline-none caret-transparent"
           readOnly
         />
@@ -71,9 +82,8 @@ const DatePicker = () => {
           </button>
         </div>
 
+        {/* Days of Week and Day Rows*/}
         <div className="p-2">
-          {/* Days of the week */}
-
           <div className="flex justify-between">{daysOfWeekHtml}</div>
 
           {/* Days - Rows */}

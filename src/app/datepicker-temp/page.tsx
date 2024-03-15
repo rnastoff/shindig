@@ -1,7 +1,10 @@
 "use client";
 import dayjs from "dayjs";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { generateMonth, months } from "@/utils/utils";
 import { useState } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 import { Calendar3 } from "react-bootstrap-icons";
 import { ChevronLeft } from "react-bootstrap-icons";
@@ -12,11 +15,12 @@ const DatePicker = () => {
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
   const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
+  dayjs.extend(isSameOrBefore);
+  dayjs.extend(isSameOrAfter);
+
   const toggleVisibility = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-
-    //open to selected month
-    // if (visible && selectedDate) setToday(dayjs(selectedDate, "MM-DD-YYYY"));
+    if (!visible && selectedDate) setToday(dayjs(selectedDate, "MM-DD-YYYY")); //open to selected month
     setVisible((prevState) => !prevState);
   };
 
@@ -27,17 +31,22 @@ const DatePicker = () => {
     if (btn === "prev") setToday(today.month(today.month() - 1));
     else if (btn === "next") setToday(today.month(today.month() + 1));
     e.preventDefault();
-    e.stopPropagation();
   };
 
   const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setSelectedDate(e.currentTarget.value); //for the visible input
-    // setVisible(false);
+    setTimeout(() => {
+      setVisible(false);
+    }, 100);
   };
 
-  const visibilityClass = visible ? "block" : "hidden";
+  // Close datepicker when click away
+  const domNode = useClickOutside(() => {
+    setVisible(false);
+  });
 
+  // Generate S,M,T,W,T,F,S
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   const daysOfWeekHtml = daysOfWeek.map((day) => {
     return (
@@ -50,23 +59,21 @@ const DatePicker = () => {
     );
   });
 
+  // Generate Days of Month
   const days = generateMonth(today.month(), today.year());
-  // console.log(days);
 
   const daysHtml = days.map(({ date, currentMonth, today }, index) => {
-    // console.log("date:", date);
     const currentMonthClass = currentMonth ? "text-white" : "";
     const disabledClass =
       "disabled:text-gray disabled:cursor-none disabled:hover:bg-transparent";
     const selectedClasses =
       date.format("MM-DD-YYYY") === selectedDate ? "bg-primary" : "";
-
-    const disabled = !currentMonth || date.isBefore(dayjs());
+    const disabled = !currentMonth || !date.isSameOrAfter(dayjs(), "day");
 
     return (
       <div key={index} className="grid place-content-center text-sm">
         <button
-          className={`${currentMonthClass} ${disabledClass} ${selectedClasses} hover:bg-primary  text-white text-sm h-8 w-8 grid place-content-center rounded-full duration-100 cursor-pointer`}
+          className={`${currentMonthClass} ${disabledClass} ${selectedClasses}  text-white text-sm h-8 w-8 grid place-content-center rounded-full duration-100 cursor-pointer`}
           onClick={handleDayClick}
           value={date.format("MM-DD-YYYY")}
           disabled={disabled}
@@ -76,6 +83,8 @@ const DatePicker = () => {
       </div>
     );
   });
+
+  const visibilityClass = visible ? "block" : "hidden";
 
   return (
     <div className="mt-12 w-[200px] relative">
@@ -93,9 +102,10 @@ const DatePicker = () => {
         <Calendar3 color="red" size="20" className="self-center" />
       </div>
 
-      {/* Entire Calendar */}
+      {/* Entire Datepicker Calendar */}
       <div
         className={`bg-[#444444] absolute w-[300px] top-[40px]  rounded-sm  ${visibilityClass} `}
+        ref={domNode}
       >
         {/* Header - Month and Year*/}
         <div className="bg-gray flex justify-between py-2">
@@ -133,10 +143,3 @@ const DatePicker = () => {
 };
 
 export default DatePicker;
-
-/*
- <div className="flex justify-between">{daysOfWeekHtml}</div>
-
-className="text-white text-sm hover:text-green hover:bg-white duration-100 flex justify-center items-center text-center  w-[35px] h-[35px]"
-
-*/

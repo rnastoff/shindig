@@ -1,4 +1,6 @@
 "use client";
+import dayjs from "dayjs";
+import { generateMonth, months } from "@/utils/utils";
 import { useState } from "react";
 
 import { Calendar3 } from "react-bootstrap-icons";
@@ -7,20 +9,31 @@ import { ChevronRight } from "react-bootstrap-icons";
 
 const DatePicker = () => {
   const [visible, setVisible] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [selectedDate, setSelectedDate] = useState("Select Day");
+  const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
+  const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
-  const toggleVisibility = (e: any) => {
+  const toggleVisibility = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
+
+    //open to selected month
+    // if (visible && selectedDate) setToday(dayjs(selectedDate, "MM-DD-YYYY"));
     setVisible((prevState) => !prevState);
+  };
+
+  const handleMonthArrowClick = (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    btn: string
+  ) => {
+    if (btn === "prev") setToday(today.month(today.month() - 1));
+    else if (btn === "next") setToday(today.month(today.month() + 1));
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(e.currentTarget.value);
     setSelectedDate(e.currentTarget.value); //for the visible input
-    // setSelectedDay(); //just the numbered day
-    setVisible(false);
+    // setVisible(false);
   };
 
   const visibilityClass = visible ? "block" : "hidden";
@@ -37,61 +50,82 @@ const DatePicker = () => {
     );
   });
 
-  const days = ["21", "22", "23", "24", "25", "26", "27"];
-  const daysHtml = days.map((day) => {
+  const days = generateMonth(today.month(), today.year());
+  // console.log(days);
+
+  const daysHtml = days.map(({ date, currentMonth, today }, index) => {
+    // console.log("date:", date);
+    const currentMonthClass = currentMonth ? "text-white" : "";
+    const disabledClass =
+      "disabled:text-gray disabled:cursor-none disabled:hover:bg-transparent";
+    const selectedClasses =
+      date.format("MM-DD-YYYY") === selectedDate ? "bg-primary" : "";
+
+    const disabled = !currentMonth || date.isBefore(dayjs());
+
     return (
-      <button
-        key={day}
-        className="text-white text-sm hover:text-green hover:bg-white duration-100 flex justify-center items-center text-center  w-[35px] h-[35px]"
-        onClick={handleDayClick}
-        value={"12-06-1979"}
-      >
-        <abbr aria-label={day}>{day}</abbr>
-      </button>
+      <div key={index} className="grid place-content-center text-sm">
+        <button
+          className={`${currentMonthClass} ${disabledClass} ${selectedClasses} hover:bg-primary  text-white text-sm h-8 w-8 grid place-content-center rounded-full duration-100 cursor-pointer`}
+          onClick={handleDayClick}
+          value={date.format("MM-DD-YYYY")}
+          disabled={disabled}
+        >
+          {date.date()}
+        </button>
+      </div>
     );
   });
 
   return (
     <div className="mt-12 w-[200px] relative">
-      {/* Input box and Icon */}
+      {/* Select Day Input box and Icon */}
       <div
         onClick={toggleVisibility}
         className="flex justify-between bg-white rounded-sm w-[64] py-1 px-2 cursor-pointer"
       >
         <input
           type="text"
-          value={selectedDate}
+          value={selectedDate ? selectedDate : "Select Date"}
           className="w-[130px] border-2 cursor-pointer border-none outline-none caret-transparent"
           readOnly
         />
         <Calendar3 color="red" size="20" className="self-center" />
       </div>
 
-      {/* Calendar */}
+      {/* Entire Calendar */}
       <div
-        className={`bg-[#444444] absolute w-[300px] top-[40px]  rounded-sm overflow-hidden ${visibilityClass} `}
+        className={`bg-[#444444] absolute w-[300px] top-[40px]  rounded-sm  ${visibilityClass} `}
       >
-        {/* Header */}
-        <div className="bg-gray flex justify-between p-2">
-          <button>
-            <ChevronLeft color="white" size="16" className="self-center" />
+        {/* Header - Month and Year*/}
+        <div className="bg-gray flex justify-between py-2">
+          <button className="px-2 py-1">
+            <ChevronLeft
+              color="white"
+              size="16"
+              className="self-center"
+              onClick={(e) => handleMonthArrowClick(e, "prev")}
+            />
           </button>
-          <p className="text-white font-semibold text-base">December 2023</p>
-          <button>
-            <ChevronRight color="white" size="16" className="self-center" />
+          <p className="text-white font-semibold text-base">
+            {months[today.month()]} {today.year()}
+          </p>
+          <button className="px-2 py-1">
+            <ChevronRight
+              color="white"
+              size="16"
+              className="self-center"
+              onClick={(e) => handleMonthArrowClick(e, "next")}
+            />
           </button>
         </div>
 
         {/* Days of Week and Day Rows*/}
         <div className="p-2">
-          <div className="flex justify-between">{daysOfWeekHtml}</div>
+          <div className="w-full grid grid-cols-7">{daysOfWeekHtml}</div>
 
           {/* Days - Rows */}
-          <div className="flex justify-between ">{daysHtml}</div>
-          <div className="flex justify-between ">{daysHtml}</div>
-          <div className="flex justify-between ">{daysHtml}</div>
-          <div className="flex justify-between ">{daysHtml}</div>
-          <div className="flex justify-between ">{daysHtml}</div>
+          <div className="w-full grid grid-cols-7">{daysHtml}</div>
         </div>
       </div>
     </div>
@@ -99,3 +133,10 @@ const DatePicker = () => {
 };
 
 export default DatePicker;
+
+/*
+ <div className="flex justify-between">{daysOfWeekHtml}</div>
+
+className="text-white text-sm hover:text-green hover:bg-white duration-100 flex justify-center items-center text-center  w-[35px] h-[35px]"
+
+*/

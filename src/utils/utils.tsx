@@ -50,7 +50,7 @@ export function generateMonth(month = dayjs().month(), year = dayjs().year()) {
     });
   }
 
-  // Create first days of next month (in the last week
+  // Create first days of next month (in the last week)
   const remainingDaysOfWeek = 7 - lastDateOfMonth.day(); //num of days left in week after last day of month
 
   for (

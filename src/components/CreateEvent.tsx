@@ -17,7 +17,6 @@ const CreateEvent = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("uhm");
   };
 
   return (
@@ -76,16 +75,9 @@ const CreateEvent = () => {
         </div>
 
         {/* Calendar and dropdowns */}
-        <div className="flex justify-between ">
-          <div className="">
-            <CreateCalendar />
-            <CreateCalendar />
-          </div>
-
-          <div className="">
-            <CreateTimeDropdown />
-            <CreateTimeDropdown />
-          </div>
+        <div className="md:flex justify-between ">
+          <CreateCalendar />
+          <CreateTimeDropdown />
         </div>
 
         {/* Location */}

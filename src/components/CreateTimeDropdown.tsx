@@ -40,7 +40,7 @@ const CreateTimeDropdown = () => {
     <div className="mt-8">
       <p className="text-white font-semibold">Start Time</p>
       <button
-        className="relative self-center mt-1 lg:w-[180px] w-[150px]"
+        className="relative self-center mt-1 md:w-[180px] w-full"
         onClick={toggleDropdown}
         onBlur={dismissHandler}
       >
@@ -52,7 +52,7 @@ const CreateTimeDropdown = () => {
         </div>
 
         {showDropdown && (
-          <div className="absolute h-48 overflow-y-auto top-[42px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-md z-10">
+          <div className="absolute h-48 overflow-y-auto top-[42px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-sm z-10">
             {dropdownHtml}
           </div>
         )}

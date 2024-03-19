@@ -15,13 +15,16 @@ const DatePicker = () => {
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
   const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
-  // dayjs.extend(isSameOrBefore);
+  dayjs.extend(isSameOrBefore);
   dayjs.extend(isSameOrAfter);
 
   const toggleVisibility = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     if (!visible && selectedDate) setToday(dayjs(selectedDate, "MM-DD-YYYY")); //open to selected month
     setVisible((prevState) => !prevState);
+    setTimeout(() => {
+      console.log(visible);
+    }, 200);
   };
 
   const handleMonthArrowClick = (
@@ -87,28 +90,28 @@ const DatePicker = () => {
   const visibilityClass = visible ? "block" : "hidden";
 
   return (
-    <div className="mt-12 w-[200px] relative">
+    <div className="lg:w-[180px] w-full relative mt-1">
       {/* Select Day Input box and Icon */}
       <div
         onClick={toggleVisibility}
-        className="flex justify-between bg-white rounded-sm w-[64] py-1 px-2 cursor-pointer"
+        className="flex justify-between bg-none border-[1px] border-primary rounded-sm w-[64] py-[5.5px] px-2 cursor-pointer"
       >
         <input
           type="text"
           value={selectedDate ? selectedDate : "Select Date"}
-          className="w-[130px] border-2 cursor-pointer border-none outline-none caret-transparent"
+          className="w-[130px] text-white bg-transparent cursor-pointer border-none outline-none caret-transparent"
           readOnly
         />
-        <Calendar3 color="red" size="20" className="self-center" />
+        <Calendar3 color="white" size="20" className="self-center" />
       </div>
 
       {/* Entire Datepicker Calendar */}
       <div
-        className={`bg-[#444444] absolute w-[300px] top-[40px]  rounded-sm  ${visibilityClass} `}
+        className={`bg-background absolute w-[300px] top-[42px] border-[1px] border-primary rounded-sm overflow-hidden z-10 ${visibilityClass} `}
         ref={domNode}
       >
         {/* Header - Month and Year*/}
-        <div className="bg-gray flex justify-between py-2">
+        <div className="bg-primary flex justify-between py-2">
           <button className="px-2 py-1">
             <ChevronLeft
               color="white"

@@ -1,17 +1,28 @@
 "use client";
+import { useState } from "react";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import { generateMonth, months } from "@/utils/utils";
-import { useState } from "react";
+
 import useClickOutside from "@/hooks/useClickOutside";
+import { generateMonth, months } from "@/utils/utils";
 
 import { Calendar3 } from "react-bootstrap-icons";
 import { ChevronLeft } from "react-bootstrap-icons";
 import { ChevronRight } from "react-bootstrap-icons";
 
-const DatePicker = () => {
-  const [visible, setVisible] = useState(false);
+interface FilterDatepickerProps {
+  selectDate: () => void;
+  setDatepickerVisible: (visible: boolean) => void;
+  setDropdownVisible: (visible: boolean) => void;
+}
+
+const FilterDatepicker = ({
+  selectDate,
+  setDatepickerVisible,
+  setDropdownVisible,
+}: FilterDatepickerProps) => {
+  const [visible, setVisible] = useState(true);
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
   const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
@@ -37,16 +48,18 @@ const DatePicker = () => {
   };
 
   const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log("handleDateClick");
     e.preventDefault();
     setSelectedDate(e.currentTarget.value); //for the visible input
     setTimeout(() => {
-      setVisible(false);
+      setDatepickerVisible(false);
     }, 100);
   };
 
   // Close datepicker when click away
   const domNode = useClickOutside(() => {
-    setVisible(false);
+    setDatepickerVisible(false);
+    setDropdownVisible(false);
   });
 
   // Generate S,M,T,W,T,F,S
@@ -87,62 +100,43 @@ const DatePicker = () => {
     );
   });
 
-  const visibilityClass = visible ? "block" : "hidden";
-
   return (
-    <div className="lg:w-[180px] w-full relative mt-1">
-      {/* Select Day Input box and Icon */}
-      <div
-        onClick={toggleVisibility}
-        className="flex justify-between bg-none border-[1px] border-primary rounded-sm w-[64] py-[5.5px] px-2 cursor-pointer"
-      >
-        <input
-          type="text"
-          value={selectedDate ? selectedDate : "Select Date"}
-          className="w-[130px] text-white bg-transparent cursor-pointer border-none outline-none caret-transparent"
-          readOnly
-        />
-        <Calendar3 color="white" size="20" className="self-center" />
+    <div
+      className={`bg-background absolute w-[300px] top-[42px] right-[0px] border-[1px] border-primary rounded-sm overflow-hidden z-10 `}
+      ref={domNode}
+    >
+      {/* Header - Month and Year*/}
+      <div className="bg-primary flex justify-between py-2">
+        <button className="px-2 py-1">
+          <ChevronLeft
+            color="white"
+            size="16"
+            className="self-center"
+            onClick={(e) => handleMonthArrowClick(e, "prev")}
+          />
+        </button>
+        <p className="text-white font-semibold text-base">
+          {months[today.month()]} {today.year()}
+        </p>
+        <button className="px-2 py-1">
+          <ChevronRight
+            color="white"
+            size="16"
+            className="self-center"
+            onClick={(e) => handleMonthArrowClick(e, "next")}
+          />
+        </button>
       </div>
 
-      {/* Entire Datepicker Calendar */}
-      <div
-        className={`bg-background absolute w-[300px] top-[42px] border-[1px] border-primary rounded-sm overflow-hidden z-10 ${visibilityClass} `}
-        ref={domNode}
-      >
-        {/* Header - Month and Year*/}
-        <div className="bg-primary flex justify-between py-2">
-          <button className="px-2 py-1">
-            <ChevronLeft
-              color="white"
-              size="16"
-              className="self-center"
-              onClick={(e) => handleMonthArrowClick(e, "prev")}
-            />
-          </button>
-          <p className="text-white font-semibold text-base">
-            {months[today.month()]} {today.year()}
-          </p>
-          <button className="px-2 py-1">
-            <ChevronRight
-              color="white"
-              size="16"
-              className="self-center"
-              onClick={(e) => handleMonthArrowClick(e, "next")}
-            />
-          </button>
-        </div>
+      {/* Days of Week and Day Rows*/}
+      <div className="p-2">
+        <div className="w-full grid grid-cols-7">{daysOfWeekHtml}</div>
 
-        {/* Days of Week and Day Rows*/}
-        <div className="p-2">
-          <div className="w-full grid grid-cols-7">{daysOfWeekHtml}</div>
-
-          {/* Days - Rows */}
-          <div className="w-full grid grid-cols-7">{daysHtml}</div>
-        </div>
+        {/* Days - Rows */}
+        <div className="w-full grid grid-cols-7">{daysHtml}</div>
       </div>
     </div>
   );
 };
 
-export default DatePicker;
+export default FilterDatepicker;

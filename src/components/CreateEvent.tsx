@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CloudUpload } from "react-bootstrap-icons";
-import CreateCalendar from "@/components/CreateCalendar";
+import CreateDatepicker from "@/components/datepicker/CreateDatepicker";
 import "@/css/datepicker.css";
 import CreateTimeDropdown from "./CreateTimeDropdown";
 
@@ -76,7 +76,7 @@ const CreateEvent = () => {
 
         {/* Calendar and dropdowns */}
         <div className="md:flex justify-between ">
-          <CreateCalendar />
+          <CreateDatepicker />
           <CreateTimeDropdown />
         </div>
 

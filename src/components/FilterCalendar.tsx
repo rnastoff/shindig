@@ -6,6 +6,8 @@ import "@/css/filtercalendar.css"; //modify this, not the above
 
 export const dynamic = "force-dynamic";
 
+// DELETE THIS FILE AFTER IMPLEMENTING CUSTOM FILTER DATEPICKER
+
 const FilterCalendar = () => {
   const [specificDay, setSpecificDay] = useState<any>(new Date());
 

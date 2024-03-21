@@ -4,52 +4,36 @@ import FilterDatepicker from "./datepicker/FilterDatepicker";
 
 const FilterDropdown = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [selectTime, setSelectTime] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   const [datepickerVisible, setDatepickerVisible] = useState(false);
 
-  const times = [
+  const dates = [
     "Any Time",
     "Today",
     "Tomorrow",
     "This Week",
     "This Weekend",
     "Next Week",
-    "Specific Date",
   ];
-
-  const handleDatepicker = () => {
-    setDropdownVisible(false);
-    setDatepickerVisible(true);
-  };
-
-  const selectDate = () => {
-    setDropdownVisible(false);
-    setDatepickerVisible(false);
-    //setTime?
-  };
 
   const toggleDropdown = () => {
     setDropdownVisible((prevState) => !prevState);
   };
 
-  const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>) => {
-    if (event.currentTarget === event.target) {
-      setDropdownVisible(false);
-    }
+  const openDatepicker = () => {
+    setDropdownVisible(false);
+    setDatepickerVisible(true);
   };
 
-  const timeSelection = (time: string) => {
-    setSelectTime(time);
-  };
-
-  const dropdownHtml = times.map((city: string, index: number) => {
+  const dropdownHtml = dates.map((date: string, index: number) => {
+    console.log(date);
     return (
       <p
         className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"
         key={index}
-        onClick={() => timeSelection(city)}
+        onClick={() => setSelectedDate(date)}
       >
-        {city}
+        {date}
       </p>
     );
   });
@@ -62,7 +46,7 @@ const FilterDropdown = () => {
     >
       <div className="flex justify-end bg-background border-[1px] border-primary  rounded-md sm:px-3 sm:py-2 py-1 px-2">
         <p className="text-white whitespace-nowrap sm:text-sm text-xs">
-          {selectTime ? selectTime : "Any Time"}
+          {selectedDate ? selectedDate : "Any Time"}
         </p>
         <ChevronDown color="white" size="14" className="self-center ml-2" />
       </div>
@@ -73,7 +57,7 @@ const FilterDropdown = () => {
           <p
             className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"
             key={"selectDate"}
-            onClick={handleDatepicker}
+            onClick={openDatepicker}
           >
             Select Date
           </p>
@@ -82,7 +66,8 @@ const FilterDropdown = () => {
 
       {datepickerVisible && (
         <FilterDatepicker
-          selectDate={selectDate}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
           setDatepickerVisible={setDatepickerVisible}
           setDropdownVisible={setDropdownVisible}
         />

@@ -1,59 +1,57 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
 import useClickOutside from "@/hooks/useClickOutside";
-import { generateMonth, months } from "@/utils/utils";
+import { generateMonth, months, isDate } from "@/utils/utils";
 
-import { Calendar3 } from "react-bootstrap-icons";
 import { ChevronLeft } from "react-bootstrap-icons";
 import { ChevronRight } from "react-bootstrap-icons";
 
 interface FilterDatepickerProps {
-  selectDate: () => void;
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
   setDatepickerVisible: (visible: boolean) => void;
   setDropdownVisible: (visible: boolean) => void;
 }
 
 const FilterDatepicker = ({
-  selectDate,
+  selectedDate,
+  setSelectedDate,
   setDatepickerVisible,
   setDropdownVisible,
 }: FilterDatepickerProps) => {
-  const [visible, setVisible] = useState(true);
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
-  const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
+  const [highlightedDay, setHighlightedDay] = useState(selectedDate); // format "01-04-2024"
+
+  // Open datepicker to month of day selected
+  useEffect(() => {
+    if (isDate(selectedDate)) setToday(dayjs(selectedDate, "MM-DD-YYYY"));
+  }, [selectedDate]);
 
   dayjs.extend(isSameOrBefore);
   dayjs.extend(isSameOrAfter);
-
-  const toggleVisibility = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    if (!visible && selectedDate) setToday(dayjs(selectedDate, "MM-DD-YYYY")); //open to selected month
-    setVisible((prevState) => !prevState);
-    setTimeout(() => {
-      console.log(visible);
-    }, 200);
-  };
 
   const handleMonthArrowClick = (
     e: React.MouseEvent<SVGElement, MouseEvent>,
     btn: string
   ) => {
+    e.preventDefault();
+    setDropdownVisible(false);
     if (btn === "prev") setToday(today.month(today.month() - 1));
     else if (btn === "next") setToday(today.month(today.month() + 1));
-    e.preventDefault();
   };
 
   const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log("handleDateClick");
     e.preventDefault();
-    setSelectedDate(e.currentTarget.value); //for the visible input
+    setSelectedDate(e.currentTarget.value); //For the filter input
+    setHighlightedDay(e.currentTarget.value); //for the red circle around date
     setTimeout(() => {
+      setDropdownVisible(false);
       setDatepickerVisible(false);
-    }, 100);
+    }, 200);
   };
 
   // Close datepicker when click away
@@ -83,7 +81,7 @@ const FilterDatepicker = ({
     const disabledClass =
       "disabled:text-gray disabled:cursor-none disabled:hover:bg-transparent";
     const selectedClasses =
-      date.format("MM-DD-YYYY") === selectedDate ? "bg-primary" : "";
+      date.format("MM-DD-YYYY") === highlightedDay ? "bg-primary" : "";
     const disabled = !currentMonth || !date.isSameOrAfter(dayjs(), "day");
 
     return (

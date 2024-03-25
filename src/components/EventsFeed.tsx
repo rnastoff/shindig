@@ -1,6 +1,6 @@
 import PreviewPost from "@/components/PreviewPost";
 
-import Search from "./Search";
+import SearchBar from "./SearchBar";
 
 const EventsFeed = () => {
   return (
@@ -8,7 +8,7 @@ const EventsFeed = () => {
       <div className="lg:w-[550px] w-[350px]">
         {/* Fixed Section */}
         <div className="bg-background pb-4 fixed lg:w-[550px] w-[350px] sm:pt-8 pt-2 sm:block hidden">
-          <Search />
+          <SearchBar />
         </div>
 
         {/* Posts */}

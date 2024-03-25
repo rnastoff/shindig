@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Star } from "react-bootstrap-icons";
 import MobileHeader from "./HeaderMobile";
-import Search from "./Search";
+import SearchBar from "./SearchBar";
 
 const EventDetails = () => {
   return (
@@ -12,7 +12,7 @@ const EventDetails = () => {
       <div className="lg:w-[550px] w-[350px] mb-24">
         {/* Fixed Section */}
         <div className="bg-background pb-4 fixed lg:w-[550px] w-[350px] sm:pt-8 pt-2 sm:block hidden">
-          <Search />
+          <SearchBar />
         </div>
 
         {/* Posts */}

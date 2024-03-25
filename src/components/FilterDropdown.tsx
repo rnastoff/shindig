@@ -2,9 +2,13 @@ import { useState } from "react";
 import { ChevronDown } from "react-bootstrap-icons";
 import FilterDatepicker from "./datepicker/FilterDatepicker";
 
-const FilterDropdown = () => {
+interface FilterDropdownProps {
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
+}
+
+const FilterDropdown = ({ selectedDate, setSelectedDate }: FilterDropdownProps) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
   const [datepickerVisible, setDatepickerVisible] = useState(false);
 
   const dates = [

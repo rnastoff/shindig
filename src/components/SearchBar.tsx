@@ -27,7 +27,7 @@ const SearchBar = () => {
   return (
     <div className="flex justify-between lg:mt-4 mt-2">
       <form className="flex w-full">
-        <label className="flex max-w-full w-full mr-2 border-[1px] p-2 border-primary bg-background rounded-md">
+        <label className="flex max-w-full w-full mr-2 border-[1px] p-2 border-primary bg-background rounded-sm">
           <input
             type="text"
             className="max-w-full w-full mr-4 text-white text-sm placeholder-white bg-background  outline-none"

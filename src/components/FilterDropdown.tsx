@@ -43,11 +43,7 @@ const FilterDropdown = ({ selectedDate, setSelectedDate }: FilterDropdownProps) 
   });
 
   return (
-    <div
-      className="relative self-center cursor-pointer"
-      onClick={toggleDropdown}
-      // onBlur={dismissHandler}
-    >
+    <div className="relative self-center cursor-pointer" onClick={toggleDropdown}>
       <div className="flex justify-end bg-background border-[1px] border-primary  rounded-md sm:px-3 sm:py-2 py-1 px-2">
         <p className="text-white whitespace-nowrap sm:text-sm text-xs">
           {selectedDate ? selectedDate : "Any Time"}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import { Search } from "react-bootstrap-icons";
@@ -8,20 +8,21 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("Any Time");
   const router = useRouter();
-
   // searchTerm=something&date=somethingelse
 
-  const handleSearchAndFilter = (
-    e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined
-  ) => {
-    if (e) e.preventDefault();
-    router.push(`?searchTerm=${searchTerm}&date=${selectedDate}`);
-  };
+  // useCallback because handleSearchAndFilter is required in the dependency array of the useEffect
+  const handleSearchAndFilter = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined) => {
+      if (e) e.preventDefault();
+      router.push(`?searchTerm=${searchTerm}&date=${selectedDate}`);
+    },
+    [router, searchTerm, selectedDate]
+  );
 
   // If selectedDate changes (the dropdown, we automatically submit
   useEffect(() => {
     handleSearchAndFilter();
-  }, [selectedDate]);
+  }, [selectedDate, handleSearchAndFilter]);
 
   return (
     <div className="flex justify-between lg:mt-4 mt-2">

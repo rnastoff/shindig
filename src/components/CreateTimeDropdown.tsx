@@ -38,7 +38,10 @@ const CreateTimeDropdown = () => {
 
   return (
     <div className="mt-8">
-      <p className="text-white font-semibold">Start Time</p>
+      <p className="text-white font-semibold">
+        Start Time
+        <span className="text-gray text-xs font-normal ml-4">Required</span>
+      </p>
       <button
         className="relative self-center mt-1 md:w-[180px] w-full"
         onClick={toggleDropdown}

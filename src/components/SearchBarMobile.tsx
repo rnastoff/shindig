@@ -4,7 +4,7 @@ import { Search } from "react-bootstrap-icons";
 
 import FilterDropdown from "@/components/FilterDropdown";
 
-const SearchMobile = () => {
+const SearchBarMobile = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState("Any Time");
   const router = useRouter();
@@ -17,7 +17,7 @@ const SearchMobile = () => {
     [router, searchTerm, selectedDate]
   );
 
-  // If selectedDate changes (the dropdown, we automatically submit
+  // If selectedDate changes (the dropdown -> datepicker, we automatically submit)
   useEffect(() => {
     handleSearchAndFilter();
   }, [selectedDate, handleSearchAndFilter]);
@@ -41,4 +41,4 @@ const SearchMobile = () => {
   );
 };
 
-export default SearchMobile;
+export default SearchBarMobile;

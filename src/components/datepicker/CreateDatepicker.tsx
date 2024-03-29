@@ -91,7 +91,11 @@ const CreateDatepicker = () => {
 
   return (
     <div className="mt-8">
-      <p className="text-white text-base font-semibold ">Start Date</p>
+      <p className="text-white text-base font-semibold ">
+        Start Date
+        <span className="text-gray text-xs font-normal ml-4">Required</span>
+      </p>
+
       <div className="lg:w-[180px] w-full relative mt-1">
         {/* Select Day Input box and Icon */}
         <div

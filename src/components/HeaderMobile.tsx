@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Pacifico } from "next/font/google";
-import SearchMobile from "./SearchMobile";
+import SearchBarMobile from "./SearchBarMobile";
 
 const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 
@@ -15,7 +15,7 @@ const HeaderMobile = () => {
         >
           Shindig
         </h1>
-        <SearchMobile />
+        <SearchBarMobile />
       </div>
     </Link>
   );

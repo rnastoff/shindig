@@ -30,7 +30,6 @@ const FilterDropdown = ({ selectedDate, setSelectedDate }: FilterDropdownProps) 
   };
 
   const dropdownHtml = dates.map((date: string, index: number) => {
-    console.log(date);
     return (
       <p
         className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"

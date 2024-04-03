@@ -6,14 +6,35 @@ import { generateMonth, months } from "@/utils/utils";
 import { useState } from "react";
 import useClickOutside from "@/hooks/useClickOutside";
 
+import { z } from "zod";
+import { EventSchema } from "@/app/models/Event";
+
+import { UseFormRegister } from "react-hook-form";
+
 import { Calendar3 } from "react-bootstrap-icons";
 import { ChevronLeft } from "react-bootstrap-icons";
 import { ChevronRight } from "react-bootstrap-icons";
 
-const CreateDatepicker = () => {
+export const dynamic = "force-dynamic";
+
+type FormData = z.infer<typeof EventSchema>;
+
+interface CreateDatepickerProps {
+  dateError: string | undefined;
+  register: UseFormRegister<FormData>;
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
+}
+
+const CreateDatepicker = ({
+  dateError,
+  register,
+  selectedDate,
+  setSelectedDate,
+}: CreateDatepickerProps) => {
   const [visible, setVisible] = useState(false);
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
-  const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
+  // const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
   dayjs.extend(isSameOrBefore);
   dayjs.extend(isSameOrAfter);
@@ -107,6 +128,7 @@ const CreateDatepicker = () => {
             value={selectedDate ? selectedDate : "Select Date"}
             className="w-[130px] text-white bg-transparent cursor-pointer border-none outline-none caret-transparent"
             readOnly
+            {...register("date")}
           />
           <Calendar3 color="white" size="20" className="self-center" />
         </div>

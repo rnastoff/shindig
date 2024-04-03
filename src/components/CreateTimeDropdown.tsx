@@ -2,15 +2,25 @@ import { useState } from "react";
 import { fillTimeArray } from "@/utils/utils";
 import { ChevronDown } from "react-bootstrap-icons";
 
-const CreateTimeDropdown = () => {
+import { z } from "zod";
+import { EventSchema } from "@/app/models/Event";
+
+import { UseFormRegister } from "react-hook-form";
+
+type FormData = z.infer<typeof EventSchema>;
+
+interface CreateTimeDropdownProps {
+  timeError: string | undefined;
+  register: UseFormRegister<FormData>;
+}
+
+const CreateTimeDropdown = ({ timeError, register }: CreateTimeDropdownProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectTime, setSelectTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   const times = fillTimeArray();
 
   const toggleDropdown = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
     setShowDropdown((prevState) => !prevState);
   };
 
@@ -20,19 +30,19 @@ const CreateTimeDropdown = () => {
     }
   };
 
-  const timeSelection = (time: string) => {
-    setSelectTime(time);
-  };
+  // const timeSelection = (time: string) => {
+  //   setSelectedTime(time);
+  // };
 
-  const dropdownHtml = times.map((city: string, index: number) => {
+  const dropdownHtml = times.map((time: string, index: number) => {
     return (
-      <p
-        className="sm:text-base text-xs px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md"
+      <button
+        className="sm:text-base text-xs text-right px-2 py-1 whitespace-nowrap hover:bg-primarydark rounded-md w-full"
         key={index}
-        onClick={() => timeSelection(city)}
+        onClick={() => setSelectedTime(time)}
       >
-        {city}
-      </p>
+        {time}
+      </button>
     );
   });
 
@@ -42,15 +52,20 @@ const CreateTimeDropdown = () => {
         Start Time
         <span className="text-gray text-xs font-normal ml-4">Required</span>
       </p>
-      <button
+      <div
         className="relative self-center mt-1 md:w-[180px] w-full"
         onClick={toggleDropdown}
-        onBlur={dismissHandler}
+        // onBlur={dismissHandler}
       >
         <div className="flex justify-between bg-background border-[1px] border-primary rounded-sm py-[5.5px] px-2">
-          <p className="text-white whitespace-nowrap text-base ">
-            {selectTime ? selectTime : "Any Time"}
-          </p>
+          <input
+            type="text"
+            className="w-[130px] text-white bg-transparent cursor-pointer border-none outline-none caret-transparent "
+            value={selectedTime ? selectedTime : "Any Time"}
+            readOnly
+            {...register("time")}
+          />
+
           <ChevronDown color="white" size="14" className="self-center ml-2" />
         </div>
 
@@ -59,7 +74,7 @@ const CreateTimeDropdown = () => {
             {dropdownHtml}
           </div>
         )}
-      </button>
+      </div>
     </div>
   );
 };

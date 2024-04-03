@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { CloudUpload } from "react-bootstrap-icons";
+import dayjs from "dayjs";
 
 import { z, ZodType } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EventSchema } from "@/app/models/Event";
 
@@ -15,26 +16,33 @@ export const dynamic = "force-dynamic";
 type FormData = z.infer<typeof EventSchema>;
 
 const CreateEvent = () => {
-  const [startDate, setStartDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   const [startTime, setStartTime] = useState("");
+
+  // console.log("PARSE: ", z.date().safeParse(new Date("fdsa")));
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    getValues,
   } = useForm<FormData>({ resolver: zodResolver(EventSchema) });
 
   const submitData = (data: FormData) => {
+    console.log("here are the fucking values:", getValues());
     // console.log(data);
     // console.log(errors);
   };
 
   useEffect(() => {
-    // console.log(errors);
-  }, []);
+    console.log(errors);
+    console.log(typeof selectedDate);
+    // console.log(getValues());
+    // console.log("date: ", errors.date?.message);
+    // console.log("time: ", errors.time?.message);
+  }, [errors, selectedDate]);
 
   const displayErrorMessage = (error: any) => {
-    console.log(error);
     return <p className="text-green text-sm text-center w-full mt-2">{error}</p>;
   };
 
@@ -99,9 +107,19 @@ const CreateEvent = () => {
         </div>
 
         {/* Calendar and dropdowns */}
-        <div className="md:flex justify-between ">
-          <CreateDatepicker />
-          <CreateTimeDropdown />
+        <div>
+          <div className="md:flex justify-between ">
+            <CreateDatepicker
+              dateError={errors.date?.message}
+              register={register}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
+            <CreateTimeDropdown timeError={errors.time?.message} register={register} />
+          </div>
+          {errors.date ? displayErrorMessage("Please select a valid date") : ""}
+
+          {/* {errors.time && displayErrorMessage("Please select a valid time and date")} */}
         </div>
 
         {/* Location */}

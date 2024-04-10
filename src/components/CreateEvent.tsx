@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EventSchema } from "@/app/models/Event";
 
 import CreateDatepicker from "@/components/datepicker/CreateDatepicker";
-import CreateTimeDropdown from "./CreateTimeDropdown";
+import CreateTimePicker from "./CreateTimePicker";
 
 export const dynamic = "force-dynamic";
 
@@ -102,7 +102,7 @@ const CreateEvent = () => {
         <div>
           <div className="md:flex justify-between ">
             <CreateDatepicker register={register} control={control} />
-            <CreateTimeDropdown register={register} control={control} />
+            <CreateTimePicker register={register} control={control} />
           </div>
           {(errors.date || errors.time) &&
             displayErrorMessage("Enter valid date and time")}

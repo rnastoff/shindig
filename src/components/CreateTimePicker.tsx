@@ -9,12 +9,12 @@ import { UseFormRegister, useController, Controller } from "react-hook-form";
 
 type FormData = z.infer<typeof EventSchema>;
 
-interface CreateTimeDropdownProps {
+interface CreateTimePickerProps {
   register: UseFormRegister<FormData>;
   control: any;
 }
 
-const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
+const CreateTimePicker = ({ register, control }: CreateTimePickerProps) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const times = fillTimeArray();
 
@@ -77,4 +77,4 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
   );
 };
 
-export default CreateTimeDropdown;
+export default CreateTimePicker;

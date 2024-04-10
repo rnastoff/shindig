@@ -16,35 +16,27 @@ export const dynamic = "force-dynamic";
 type FormData = z.infer<typeof EventSchema>;
 
 const CreateEvent = () => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-
-  // console.log("PARSE: ", z.date().safeParse(new Date("fdsa")));
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     getValues,
-  } = useForm<FormData>({ resolver: zodResolver(EventSchema) });
+    control,
+  } = useForm<FormData>({
+    resolver: zodResolver(EventSchema),
+  });
 
   const submitData = (data: FormData) => {
-    console.log("here are the fucking values:", getValues());
-    // console.log(data);
-    // console.log(errors);
+    console.log("here are the values:", getValues());
   };
-
-  useEffect(() => {
-    console.log(errors);
-    console.log(typeof selectedDate);
-    // console.log(getValues());
-    // console.log("date: ", errors.date?.message);
-    // console.log("time: ", errors.time?.message);
-  }, [errors, selectedDate]);
 
   const displayErrorMessage = (error: any) => {
     return <p className="text-green text-sm text-center w-full mt-2">{error}</p>;
   };
+
+  useEffect(() => {
+    console.log("ERRORS: ", errors);
+  });
 
   return (
     <section className="flex justify-center bg-background px-4">
@@ -109,17 +101,11 @@ const CreateEvent = () => {
         {/* Calendar and dropdowns */}
         <div>
           <div className="md:flex justify-between ">
-            <CreateDatepicker
-              dateError={errors.date?.message}
-              register={register}
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-            />
-            <CreateTimeDropdown timeError={errors.time?.message} register={register} />
+            <CreateDatepicker register={register} />
+            <CreateTimeDropdown register={register} control={control} />
           </div>
-          {errors.date ? displayErrorMessage("Please select a valid date") : ""}
-
-          {/* {errors.time && displayErrorMessage("Please select a valid time and date")} */}
+          {(errors.date || errors.time) &&
+            displayErrorMessage("Enter valid date and time")}
         </div>
 
         {/* Location */}
@@ -155,13 +141,11 @@ const CreateEvent = () => {
         <div className="mt-8">
           <label className="text-white text-base font-semibold" htmlFor="externalLink">
             External Link
-            {/* <span className="text-gray text-xs font-normal ml-4">Required</span> */}
           </label>
           <input
             className="w-full border-[1px] border-primary bg-background rounded-sm outline-none text-white p-1 mt-1"
             type="text"
             id="externalLink"
-            // name="externalLink"
             {...register("externalLink")}
           />
         </div>
@@ -178,7 +162,6 @@ const CreateEvent = () => {
             className="w-full border-[1px] border-primary bg-background rounded-sm outline-none text-white p-1 mt-1"
             type="text"
             id="tags"
-            // name="tags"
             {...register("tags")}
           />
         </div>
@@ -194,3 +177,13 @@ const CreateEvent = () => {
 };
 
 export default CreateEvent;
+
+// <div className="md:flex justify-between ">
+//             <CreateDatepicker
+//               dateError={errors.date?.message}
+//               register={register}
+//               control={control}
+//             />
+//             <CreateTimeDropdown timeError={errors.time?.message} register={register} />
+//           </div>
+//           {errors.date ? displayErrorMessage("Please select a valid date") : ""}

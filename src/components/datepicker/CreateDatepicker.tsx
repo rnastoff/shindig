@@ -9,7 +9,7 @@ import useClickOutside from "@/hooks/useClickOutside";
 import { z } from "zod";
 import { EventSchema } from "@/app/models/Event";
 
-import { UseFormRegister } from "react-hook-form";
+import { Controller, UseFormRegister, Control, FieldValues } from "react-hook-form";
 
 import { Calendar3 } from "react-bootstrap-icons";
 import { ChevronLeft } from "react-bootstrap-icons";
@@ -20,21 +20,15 @@ export const dynamic = "force-dynamic";
 type FormData = z.infer<typeof EventSchema>;
 
 interface CreateDatepickerProps {
-  dateError: string | undefined;
   register: UseFormRegister<FormData>;
-  selectedDate: string;
-  setSelectedDate: (date: string) => void;
+  // dateError: string | undefined;
+  // control?: any; //Control<FieldValues>
 }
 
-const CreateDatepicker = ({
-  dateError,
-  register,
-  selectedDate,
-  setSelectedDate,
-}: CreateDatepickerProps) => {
+const CreateDatepicker = ({ register }: CreateDatepickerProps) => {
   const [visible, setVisible] = useState(false);
   const [today, setToday] = useState(dayjs()); //used to generate month/days, dayjs object
-  // const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
+  const [selectedDate, setSelectedDate] = useState(""); // format "01-04-2024"
 
   dayjs.extend(isSameOrBefore);
   dayjs.extend(isSameOrAfter);
@@ -59,10 +53,11 @@ const CreateDatepicker = ({
 
   const handleDayClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setSelectedDate(e.currentTarget.value); //for the visible input
+    setSelectedDate(e.currentTarget.value);
     setTimeout(() => {
       setVisible(false);
     }, 100);
+    return e.currentTarget.value;
   };
 
   // Close datepicker when click away
@@ -86,6 +81,7 @@ const CreateDatepicker = ({
   // Generate Days of Month
   const days = generateMonth(today.month(), today.year());
 
+  // Map Days to Html
   const daysHtml = days.map(({ date, currentMonth, today }, index) => {
     const currentMonthClass = currentMonth ? "text-white" : "";
     const disabledClass =
@@ -108,6 +104,10 @@ const CreateDatepicker = ({
     );
   });
 
+  const buttonClick = () => {
+    console.log("click");
+  };
+
   const visibilityClass = visible ? "block" : "hidden";
 
   return (
@@ -119,6 +119,8 @@ const CreateDatepicker = ({
 
       <div className="lg:w-[180px] w-full relative mt-1">
         {/* Select Day Input box and Icon */}
+
+        {/* <Controller  */}
         <div
           onClick={toggleVisibility}
           className="flex justify-between bg-none border-[1px] border-primary rounded-sm w-[64] py-[5.5px] px-2 cursor-pointer"

@@ -22,7 +22,6 @@ export function fillTimeArray() {
       break; // Break loop if advancing to the next day
     }
   }
-
   return times;
 }
 
@@ -80,7 +79,7 @@ export const months = [
   "December",
 ];
 
-// DATE MATCH
+// IS IT A DATE
 export function isDate(date: string) {
   const dateRegex = /^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-(\d{4})$/;
   return dateRegex.test(date);

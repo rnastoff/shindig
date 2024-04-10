@@ -32,7 +32,6 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
         Start Time
         <span className="text-gray text-xs font-normal ml-4">Required</span>
       </p>
-
       {/*  */}
       <Controller
         name="time"
@@ -48,7 +47,7 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
                 type="text"
                 className="w-[130px] text-white bg-transparent cursor-pointer border-none outline-none caret-transparent "
                 value={value ? value : "Select Time"}
-                ref={ref}
+                // ref={ref}
                 readOnly
               />
 
@@ -72,7 +71,8 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
             )}
           </div>
         )}
-      />
+      />{" "}
+      {/* Controller */}
     </div>
   );
 };

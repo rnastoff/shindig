@@ -101,7 +101,7 @@ const CreateEvent = () => {
         {/* Calendar and dropdowns */}
         <div>
           <div className="md:flex justify-between ">
-            <CreateDatepicker register={register} />
+            <CreateDatepicker register={register} control={control} />
             <CreateTimeDropdown register={register} control={control} />
           </div>
           {(errors.date || errors.time) &&

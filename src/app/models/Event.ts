@@ -4,6 +4,7 @@ const MAX_UPLOAD_SIZE = 1024 * 1024 * 3;
 const ACCEPTED_FILE_TYPES = ['image/png', 'image/jpg'];
 
 const timeRegex = new RegExp(/^(0?[1-9]|1[0-2]):([0-5][0-9]) (AM|PM)$/i);
+const dateRegex = new RegExp(/^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-(\d{4})$/);
 
 export const EventSchema = z.object({
   name: z.string()
@@ -18,7 +19,7 @@ export const EventSchema = z.object({
     // .refine((file) => {
     //   return ACCEPTED_FILE_TYPES.includes(file.type);
     // }, 'File must be a JPG or PNG'),
-  date: z.string(),
+  date: z.string().regex(dateRegex),
   time: z.string().regex(timeRegex),
   location: z.string().trim().min(3, { message: "Location is required" }).optional(),
   price: z.string().optional(),

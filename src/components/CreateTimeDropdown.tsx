@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { fillTimeArray } from "@/utils/utils";
 import { ChevronDown } from "react-bootstrap-icons";
+import useClickOutside from "@/hooks/useClickOutside";
 
 import { z } from "zod";
 import { EventSchema } from "@/app/models/Event";
-
 import { UseFormRegister, useController, Controller } from "react-hook-form";
 
 type FormData = z.infer<typeof EventSchema>;
@@ -12,25 +12,19 @@ type FormData = z.infer<typeof EventSchema>;
 interface CreateTimeDropdownProps {
   register: UseFormRegister<FormData>;
   control: any;
-  // timeError: string | undefined;
 }
 
-// { timeError, register }: CreateTimeDropdownProps
-
 const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const times = fillTimeArray();
 
   const toggleDropdown = (e: any) => {
-    setShowDropdown((prevState) => !prevState);
+    setDropdownVisible((prevState) => !prevState);
   };
 
-  const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>) => {
-    if (event.currentTarget === event.target) {
-      setShowDropdown(false);
-    }
-  };
+  const domNode = useClickOutside(() => {
+    setDropdownVisible(false);
+  });
 
   return (
     <div className="mt-8">
@@ -47,7 +41,7 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
           <div
             className="relative self-center mt-1 md:w-[180px] w-full"
             onClick={toggleDropdown}
-            // onBlur={dismissHandler}
+            ref={domNode}
           >
             <div className="flex justify-between bg-background border-[1px] border-primary rounded-sm py-[5.5px] px-2">
               <input
@@ -61,7 +55,7 @@ const CreateTimeDropdown = ({ register, control }: CreateTimeDropdownProps) => {
               <ChevronDown color="white" size="14" className="self-center ml-2" />
             </div>
 
-            {showDropdown && (
+            {dropdownVisible && (
               <div className="absolute h-48 overflow-y-auto top-[42px] right-[0px] w-[160px] py-1 px-1 text-white  text-right bg-primary border-[1px] border-primary rounded-sm z-10">
                 {times.map((time: string, index: number) => {
                   return (

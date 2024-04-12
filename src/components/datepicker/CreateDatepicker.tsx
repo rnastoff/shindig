@@ -19,9 +19,13 @@ export const dynamic = "force-dynamic";
 
 type FormData = z.infer<typeof EventSchema>;
 
+type CreateDatePickerType = {
+  date: string;
+};
+
 interface CreateDatepickerProps {
   register: UseFormRegister<FormData>;
-  control?: any; //Control<FieldValues>
+  control?: Control<FormData>;
 }
 
 const CreateDatepicker = ({ register, control }: CreateDatepickerProps) => {

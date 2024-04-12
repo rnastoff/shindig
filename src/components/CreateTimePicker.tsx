@@ -5,13 +5,13 @@ import useClickOutside from "@/hooks/useClickOutside";
 
 import { z } from "zod";
 import { EventSchema } from "@/app/models/Event";
-import { UseFormRegister, useController, Controller } from "react-hook-form";
+import { UseFormRegister, Controller, Control, FieldValues } from "react-hook-form";
 
 type FormData = z.infer<typeof EventSchema>;
 
 interface CreateTimePickerProps {
   register: UseFormRegister<FormData>;
-  control: any;
+  control?: Control<FormData>;
 }
 
 const CreateTimePicker = ({ register, control }: CreateTimePickerProps) => {

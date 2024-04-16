@@ -1,6 +1,6 @@
 "use client";
 
-import Wrapper from "@/components/Wrapper";
+import Login from "@/components/auth/Login";
 import EventsFeed from "@/components/EventsFeed";
 
 export default function Home() {
@@ -8,8 +8,9 @@ export default function Home() {
   // If no auth, redirect to /signup or login
 
   return (
-    <Wrapper>
-      <EventsFeed />
-    </Wrapper>
+    <div>
+      <Login />
+      {/* <EventsFeed /> */}
+    </div>
   );
 }

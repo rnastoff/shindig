@@ -49,11 +49,11 @@ export const Login = () => {
               <input
                 type="password"
                 id="password"
-                className="bg-background border-[1px] border-primary text-white p-2 rounded-lg outline-0 mt-1"
+                className="bg-background border-[1px] border-primary text-white p-2 rounded-sm outline-0 mt-1"
               />
             </div>
 
-            <button className="bg-primary text-white font-semibold text-xl rounded-lg p-3 mt-8">
+            <button className="bg-primary text-white font-semibold text-xl rounded-sm p-3 mt-8">
               Login
             </button>
           </form>

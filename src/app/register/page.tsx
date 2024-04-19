@@ -85,9 +85,9 @@ const Register = () => {
 
             <button
               type="submit"
-              className="bg-primary text-white font-bold text-xl rounded-lg p-4 mt-6"
+              className="bg-primary text-white font-bold text-xl rounded-sm p-4 mt-6"
             >
-              REGISTER
+              Register
             </button>
             <div className="border-b-[1px] border-primary mt-6"></div>
           </form>
@@ -95,7 +95,7 @@ const Register = () => {
           <p className="text-center mt-6">
             <span className="text-white">Already have have an account? </span>
             <Link className="text-primary font-bold sm:inline block" href={`/`}>
-              Log In
+              Login
             </Link>
           </p>
         </div>

@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { CloudUpload } from "react-bootstrap-icons";
-import dayjs from "dayjs";
 
-import { z, ZodType } from "zod";
-import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EventSchema } from "@/app/models/Event";
 
@@ -166,7 +165,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end mt-6">
           <button className="text-white text-semi-bold sm:text-lg text-base bg-primary rounded-md sm:py-2 px-8 py-1 ">
             Submit
           </button>

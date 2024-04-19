@@ -33,12 +33,6 @@ export const Login = () => {
 
   return (
     <div className="flex justify-center sm:mt-12 mt-4">
-      {/* Error */}
-      {/* {Object.values(errors)[0]?.message && displayErrorMessage(Object.values(errors)[0]?.message)}
-      {submitError && displayErrorMessage(submitError)} */}
-      {/* Form */}
-
-      {}
       <div>
         <h1 className={`${pacifico.className} text-primary text-center text-[35px] px-2`}>
           Shindig

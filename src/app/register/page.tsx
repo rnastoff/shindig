@@ -1,10 +1,32 @@
+"use client";
+import { useEffect } from "react";
+
 import Link from "next/link";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterSchema } from "@/app/models/Register";
+
 import { Pacifico } from "next/font/google";
 
 const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 
+type FormData = z.infer<typeof RegisterSchema>;
+
 const Register = () => {
-  const handleSubmit = () => {};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(RegisterSchema),
+  });
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
+  const submitData = () => {};
 
   return (
     <div className="flex justify-center sm:mt-12 mt-4">
@@ -17,8 +39,8 @@ const Register = () => {
           Shindig
         </h1>
 
-        <div className="rounded-sm border-[1px] border-primary sm:w-[500px] sm:h-[610px] h-[730px] w-full h-full mt-4">
-          <form className="flex flex-col px-8" onSubmit={handleSubmit()}>
+        <div className="rounded-sm border-[1px] border-primary sm:w-[500px] w-full h-full mt-4">
+          <form className="flex flex-col px-8" onSubmit={handleSubmit(submitData)}>
             <h2 className="text-white text-center text-2xl font-bold mt-6">Register</h2>
 
             <div className="flex sm:flex-row flex-col justify-between">
@@ -31,6 +53,7 @@ const Register = () => {
                   type="text"
                   id="firstName"
                   className="bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[200px] w-[230px]"
+                  {...register("firstName")}
                 />
               </div>
 
@@ -43,9 +66,15 @@ const Register = () => {
                   type="text"
                   id="lastName"
                   className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[200px] w-[230px]`}
+                  {...register("lastName")}
                 />
               </div>
             </div>
+            {(errors.firstName || errors.lastName) && (
+              <p className="text-green sm:text-base text-sm text-center mt-4">
+                Please enter valid first and last name
+              </p>
+            )}
 
             {/*  EMAIL */}
             <div className={`flex flex-col mt-6`}>
@@ -56,7 +85,13 @@ const Register = () => {
                 type="email"
                 id="email"
                 className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[435px] w-[230px] `}
+                {...register("email")}
               />
+              {errors.email && (
+                <p className="text-green sm:text-base text-sm text-center mt-4">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/*  PASSWORD */}
@@ -68,7 +103,13 @@ const Register = () => {
                 type="password"
                 id="password"
                 className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[435px] w-[230px] `}
+                {...register("password")}
               />
+              {errors.password && (
+                <p className="text-green sm:text-base text-sm text-center mt-4">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             {/*  CONFIRM PASSWORD */}
@@ -80,7 +121,13 @@ const Register = () => {
                 type="password"
                 id="confirmPassword"
                 className={`bg-background rounded-sm border-primary border-[1px] text-white  p-2 outline-0 sm:w-[435px] w-[230px] `}
+                {...register("confirmPassword")}
               />
+              {errors.confirmPassword && (
+                <p className="text-green sm:text-base text-sm text-center mt-4">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
             <button

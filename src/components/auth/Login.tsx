@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/app/models/Login";
 
+import { Facebook } from "react-bootstrap-icons";
+import { Google } from "react-bootstrap-icons";
+
 import { Pacifico } from "next/font/google";
 const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 
@@ -75,33 +78,65 @@ export const Login = () => {
               />
             </div>
 
+            {/* Log in */}
             <button className="bg-primary text-white font-semibold text-xl rounded-sm p-3 mt-8">
               Login
             </button>
           </form>
 
+          {/* Sign in with Demo Account */}
           <p className="text-center mt-6">
             <button
               onClick={handleSubmit(demoAccount)}
               className="text-white text-center font-semibold"
             >
-              Demo Account
+              Sign in with Demo Account
             </button>
           </p>
+
+          {/* OR */}
+          <div className="flex justify-between mt-4">
+            <div className="border-t-[1px] border-primary w-[40%] self-center"></div>
+            <p className="text-white">OR</p>
+            <div className="border-t-[1px] border-primary w-[40%] self-center"></div>
+          </div>
+
+          {/* OAuth */}
+          <div className="mt-8">
+            <button className="border-[1px] border-primary w-full p-2">
+              <div className="flex justify-center">
+                <Facebook color="white" size={20} className="self-center" />
+                <p className="text-white ml-4">Log in with Facebook</p>
+              </div>
+            </button>
+            <button className="border-[1px] border-primary w-full p-2 mt-4">
+              <div className="flex justify-center">
+                <Google color="white" size={20} className="self-center" />
+                <p className="text-white ml-4">Log in with Google</p>
+              </div>
+            </button>
+          </div>
         </div>
+
+        {/* Error Message */}
         {error && (
           <p className="text-green sm:text-base text-sm text-center mt-4">
             Please enter a valid email and password
           </p>
         )}
-        <p className="text-center mt-6">
-          <Link
-            className="text-primary text-center font-semibold rounded-lg mt-4 w-full"
-            href={`/register`}
-          >
-            Create a New Account
-          </Link>
-        </p>
+
+        {/* Don't have an Account */}
+        <div className="border-[1px] border-primary mt-4 p-4">
+          <p className="text-center">
+            <span className="text-white">Don&lsquo;t have an acccount? </span>
+            <Link
+              className="text-primary text-center font-semibold rounded-lg w-full"
+              href={`/register`}
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

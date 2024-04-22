@@ -35,14 +35,15 @@ export const Login = () => {
   const error = errors.email || errors.password;
 
   return (
-    <div className="flex justify-center sm:mt-12 mt-4">
-      <div>
-        <h1 className={`${pacifico.className} text-primary text-center text-[35px] px-2`}>
-          Shindig
-        </h1>
-        <div className="rounded-sm border-[1px] border-primary sm:w-[420px] mt-4 shadow-xl w-full p-8">
+    <div className="flex justify-center sm:mt-12 mt-2">
+      <div className="">
+        <div className="rounded-sm sm:border-[1px] border-primary sm:w-[420px] w-full p-8">
           <form className="flex flex-col" onSubmit={handleSubmit(submitData)}>
-            <h2 className="text-white text-center text-2xl font-bold">Login</h2>
+            <h1
+              className={`${pacifico.className} text-primary text-center text-[35px] px-2`}
+            >
+              Shindig
+            </h1>
 
             {/* Email */}
             <div className="flex flex-col border-darkbg mt-4">
@@ -95,21 +96,21 @@ export const Login = () => {
           </p>
 
           {/* OR */}
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-between mt-8">
             <div className="border-t-[1px] border-primary w-[40%] self-center"></div>
-            <p className="text-white">OR</p>
+            <p className="text-white text-sm">OR</p>
             <div className="border-t-[1px] border-primary w-[40%] self-center"></div>
           </div>
 
           {/* OAuth */}
           <div className="mt-8">
-            <button className="border-[1px] border-primary w-full p-2">
+            <button className="border-[1px] border-primary rounded-sm w-full p-2">
               <div className="flex justify-center">
                 <Facebook color="white" size={20} className="self-center" />
                 <p className="text-white ml-4">Log in with Facebook</p>
               </div>
             </button>
-            <button className="border-[1px] border-primary w-full p-2 mt-4">
+            <button className="border-[1px] border-primary rounded-sm w-full p-2 mt-6">
               <div className="flex justify-center">
                 <Google color="white" size={20} className="self-center" />
                 <p className="text-white ml-4">Log in with Google</p>
@@ -126,16 +127,18 @@ export const Login = () => {
         )}
 
         {/* Don't have an Account */}
-        <div className="border-[1px] border-primary mt-4 p-4">
-          <p className="text-center">
-            <span className="text-white">Don&lsquo;t have an acccount? </span>
-            <Link
-              className="text-primary text-center font-semibold rounded-lg w-full"
-              href={`/register`}
-            >
-              Sign up
-            </Link>
-          </p>
+        <div className="sm:w-[420px] sm:p-0 px-8 mb-24 sm:mt-4 mt-0">
+          <div className="sm:border-[1px] sm:border-primary sm:py-4 rounded-sm">
+            <p className="text-center">
+              <span className="text-white">Don&lsquo;t have an acccount? </span>
+              <Link
+                className="text-primary text-center font-semibold rounded-lg w-full"
+                href={`/register`}
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

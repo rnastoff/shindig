@@ -29,19 +29,15 @@ const Register = () => {
   const submitData = () => {};
 
   return (
-    <div className="flex justify-center sm:mt-12 mt-4">
-      {/* Error */}
-      {/* {Object.values(errors)[0]?.message && displayErrorMessage(Object.values(errors)[0]?.message)}
-  {submitError && displayErrorMessage(submitError)} */}
-      {/* Form */}
+    <div className="flex justify-center sm:mt-12 mt-0">
       <div>
-        <h1 className={`${pacifico.className} text-primary text-center text-[35px] px-2`}>
-          Shindig
-        </h1>
-
-        <div className="rounded-sm border-[1px] border-primary sm:w-[500px] w-full h-full mt-4">
+        <div className="rounded-sm sm:border-[1px] sm:border-primary sm:w-[500px] w-full h-full sm:mt-4 mb-4">
           <form className="flex flex-col px-8" onSubmit={handleSubmit(submitData)}>
-            <h2 className="text-white text-center text-2xl font-bold mt-6">Register</h2>
+            <h1
+              className={`${pacifico.className} text-primary text-center text-[35px] px-2 mt-8`}
+            >
+              Shindig
+            </h1>
 
             <div className="flex sm:flex-row flex-col justify-between">
               {/* FIRST NAME */}
@@ -139,7 +135,7 @@ const Register = () => {
             <div className="border-b-[1px] border-primary mt-6"></div>
           </form>
 
-          <p className="text-center mt-6">
+          <p className="sm:text-base text-sm text-center mt-6">
             <span className="text-white">Already have have an account? </span>
             <Link className="text-primary font-bold sm:inline block" href={`/`}>
               Login

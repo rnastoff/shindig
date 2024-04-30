@@ -39,34 +39,24 @@ const Register = () => {
               Shindig
             </h1>
 
-            <div className="flex sm:flex-row flex-col justify-between">
-              {/* FIRST NAME */}
-              <div className={`flex flex-col mt-8 sm:w-[200px]`}>
-                <label className="text-white" htmlFor="firstName">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  className="bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[200px] w-[230px]"
-                  {...register("firstName")}
-                />
-              </div>
-
-              {/* LAST NAME */}
-              <div className={`flex flex-col mt-8 sm:w-[200px] `}>
-                <label className="text-white" htmlFor="firstName">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[200px] w-[230px]`}
-                  {...register("lastName")}
-                />
-              </div>
+            <div className={`flex flex-col mt-6`}>
+              <label className="text-white" htmlFor="email">
+                Name
+              </label>
+              <input
+                type="email"
+                id="email"
+                className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[435px] w-[230px] `}
+                {...register("name")}
+              />
+              {errors.name && (
+                <p className="text-green sm:text-base text-sm text-center mt-4">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
-            {(errors.firstName || errors.lastName) && (
+
+            {errors.name && (
               <p className="text-green sm:text-base text-sm text-center mt-4">
                 Please enter valid first and last name
               </p>

@@ -135,7 +135,7 @@ export const Login = () => {
                 className="text-primary text-center font-semibold rounded-lg w-full"
                 href={`/register`}
               >
-                Sign up
+                Register
               </Link>
             </p>
           </div>

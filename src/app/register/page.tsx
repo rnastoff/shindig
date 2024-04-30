@@ -5,34 +5,62 @@ import Link from "next/link";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema } from "@/app/models/Register";
+import { NewUserSchema } from "@/app/models/NewUserSchema";
+
+import { ID, Query } from "appwrite";
+import {
+  appwriteConfig,
+  account,
+  databases,
+  storage,
+  avatars,
+} from "@/lib/appwrite/config"; //Move for Mutations
 
 import { Pacifico } from "next/font/google";
 
 const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 
-type FormData = z.infer<typeof RegisterSchema>;
+type NewUser = z.infer<typeof NewUserSchema>;
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(RegisterSchema),
+  } = useForm<NewUser>({
+    resolver: zodResolver(NewUserSchema),
   });
 
   useEffect(() => {
     console.log(errors);
   }, [errors]);
 
-  const submitData = () => {};
+  const handleSignup = async (user: NewUser) => {
+    const newUser = await createUserAccount(user);
+    console.log("new user:", newUser);
+  };
+
+  const createUserAccount = async (user: NewUser) => {
+    console.log("user from inside createUserAccount:", user);
+    try {
+      const newAccount = await account.create(
+        ID.unique(),
+        user.email,
+        user.password,
+        user.name
+      );
+      return newAccount;
+    } catch (error) {
+      console.log("ERROR:", error);
+      return error;
+    }
+  };
 
   return (
     <div className="flex justify-center sm:mt-12 mt-0">
       <div>
         <div className="rounded-sm sm:border-[1px] sm:border-primary sm:w-[500px] w-full h-full sm:mt-4 mb-4">
-          <form className="flex flex-col px-8" onSubmit={handleSubmit(submitData)}>
+          <form className="flex flex-col px-8" onSubmit={handleSubmit(handleSignup)}>
             <h1
               className={`${pacifico.className} text-primary text-center text-[35px] px-2 mt-8`}
             >
@@ -44,8 +72,8 @@ const Register = () => {
                 Name
               </label>
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="name"
                 className={`bg-background rounded-sm border-primary border-[1px] text-white p-2 outline-0 sm:w-[435px] w-[230px] `}
                 {...register("name")}
               />

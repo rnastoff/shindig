@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/app/models/Login";
+import { LoginSchema } from "@/lib/validation/Login";
 
 import { Facebook } from "react-bootstrap-icons";
 import { Google } from "react-bootstrap-icons";
@@ -14,7 +14,16 @@ const pacifico = Pacifico({ weight: ["400"], subsets: ["latin"] });
 
 type FormData = z.infer<typeof LoginSchema>;
 
-export const Login = () => {
+interface Params {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export const Login = ({ params, searchParams }: Params) => {
+  const [registeredMessage, setRegisterMessage] = useState(searchParams.registered || "");
+
+  console.log("Searchparams: ", searchParams.registered);
+
   const {
     register,
     handleSubmit,
@@ -24,9 +33,9 @@ export const Login = () => {
   });
 
   // Delete Me
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+  // useEffect(() => {
+  //   console.log(params);
+  // }, [errors]);
 
   const submitData = () => {};
 
@@ -119,10 +128,17 @@ export const Login = () => {
           </div>
         </div>
 
-        {/* Error Message */}
+        {/* Valid Email/Password Error Message */}
         {error && (
           <p className="text-green sm:text-base text-sm text-center mt-4">
             Please enter a valid email and password
+          </p>
+        )}
+
+        {/* Just Registered Message */}
+        {registeredMessage && (
+          <p className="text-green sm:text-base text-sm text-center mt-4">
+            You&apos;ve Been Registered. Login.
           </p>
         )}
 

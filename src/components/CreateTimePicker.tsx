@@ -4,7 +4,7 @@ import { ChevronDown } from "react-bootstrap-icons";
 import useClickOutside from "@/hooks/useClickOutside";
 
 import { z } from "zod";
-import { EventSchema } from "@/app/models/Event";
+import { EventSchema } from "@/lib/validation/Event";
 import { UseFormRegister, Controller, Control, FieldValues } from "react-hook-form";
 
 type FormData = z.infer<typeof EventSchema>;

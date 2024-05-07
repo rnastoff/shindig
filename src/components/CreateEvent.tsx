@@ -5,7 +5,7 @@ import { CloudUpload } from "react-bootstrap-icons";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EventSchema } from "@/app/models/Event";
+import { EventSchema } from "@/lib/validation/Event";
 
 import CreateDatepicker from "@/components/datepicker/CreateDatepicker";
 import CreateTimePicker from "./CreateTimePicker";

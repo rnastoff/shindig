@@ -36,14 +36,12 @@ const Register = () => {
       const newUser = await createUserAccount(user);
 
       if (!newUser) {
-        //set some error here
+        setRegisterError("There was an error. Try again.");
         return;
       }
 
-      router.push("/?registered=true");
-      // If no error, redirect to Login page. Need some way to say "You can login now" before redirection
       setRegisterError("");
-      // redirect();
+      router.push("/?registered=true");
     } catch (error) {
       setRegisterError("There was an error. Try again.");
     }
@@ -140,8 +138,18 @@ const Register = () => {
             <button
               type="submit"
               className="bg-primary text-white font-bold text-xl rounded-sm p-4 mt-6"
+              disabled={isSubmitting}
             >
-              Register
+              {!isSubmitting && "Register"}
+              {isSubmitting && (
+                <div>
+                  <div
+                    className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-white border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status"
+                  ></div>
+                  <span className="text-white ml-4">Submitting...</span>
+                </div>
+              )}
             </button>
             <div className="border-b-[1px] border-primary mt-6"></div>
           </form>
